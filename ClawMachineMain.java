@@ -1,7 +1,10 @@
+import java.rmi.*;
+
 public class ClawMachineMain {
 
 	public static void main(String[] args) {
-		int count = 0;
+		ClawMachineRemote clawMachine = null;
+		int count;
 
 		if (args.length < 2) {
 			System.out.println("ClawMachine <name> <inventory>");
@@ -10,51 +13,11 @@ public class ClawMachineMain {
 
 		try {
 			count = Integer.parseInt(args[1]);
+
+			clawMachine = new ClawMachine(args[0], count);
+			Naming.rebind("//" + args[0] + "/clawMachine", clawMachine);
 			} catch (Exception e) {
 				e.printStackTrace();
-				System.exit(1);
 			}
-			ClawMachine clawMachine = new ClawMachine(args[0], count);
-
-			ClawMonitor monitor = new ClawMonitor(clawMachine);
-
-		System.out.println(clawMachine);
-
-		clawMachine.insertPayment();
-		clawMachine.dropClaw();
-		clawMachine.insertPayment();
-		clawMachine.dropClaw();
-
-		System.out.println(clawMachine);
-
-		clawMachine.insertPayment();
-		clawMachine.dropClaw();
-		clawMachine.insertPayment();
-		clawMachine.dropClaw();
-
-		System.out.println(clawMachine);
-
-		clawMachine.insertPayment();
-		clawMachine.dropClaw();
-		clawMachine.insertPayment();
-		clawMachine.dropClaw();
-
-		System.out.println(clawMachine);
-
-		clawMachine.insertPayment();
-		clawMachine.dropClaw();
-		clawMachine.insertPayment();
-		clawMachine.dropClaw();
-
-		System.out.println(clawMachine);
-
-		clawMachine.insertPayment();
-		clawMachine.dropClaw();
-		clawMachine.insertPayment();
-		clawMachine.dropClaw();
-
-		System.out.println(clawMachine);
-
-		monitor.report();
 	}
 }

@@ -1,6 +1,6 @@
 public class SoldOutState implements State {
 	private static final long serialVersionUID = 2L;
-    ClawMachine clawMachine;
+    transient ClawMachine clawMachine;
  
     public SoldOutState(ClawMachine clawMachine) {
         this.clawMachine = clawMachine;
@@ -20,10 +20,6 @@ public class SoldOutState implements State {
  
 	public void dispense() {
 		System.out.println("No prize dispensed");
-	}
-	
-	public void refill() { 
-		clawMachine.setState(clawMachine.getNoPaymentState());
 	}
  
 	public String toString() {

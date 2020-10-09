@@ -1,5 +1,9 @@
-public class ClawMachine {
+import java.rmi.*;
+import java.rmi.server.*;
+
+public class ClawMachine extends UnicastRemoteObject implements ClawMachineRemote {
  
+	private static final long serialVersionUID = 2L;
 	State soldOutState;
 	State noPaymentReceived;
 	State paymentReceived;
@@ -10,14 +14,14 @@ public class ClawMachine {
 	int count = 0;
 	String location;
  
-	public ClawMachine(String location, int count) {
+	public ClawMachine(String location, int numberPrizes) throws RemoteException {
 		soldOutState = new SoldOutState(this);
 		noPaymentReceived = new NoPaymentReceived(this);
 		paymentReceived = new PaymentReceived(this);
 		soldState = new SoldState(this);
 		winnerState = new WinnerState(this);
 
-		this.count = count;
+		this.count = numberPrizes;
  		if (count > 0) {
 			state = noPaymentReceived;
 		}
@@ -47,14 +51,14 @@ public class ClawMachine {
 			count = count - 1;
 		}
 	}
- 
-	public int getCount() {
-		return count;
-	}
- 
+  
 	public void refill(int count) {
 		this.count = count;
 		state = noPaymentReceived;
+	}
+
+	public int getCount() {
+		return count;
 	}
 
     public State getState() {

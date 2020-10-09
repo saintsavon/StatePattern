@@ -1,6 +1,6 @@
 public class WinnerState implements State {
 	private static final long serialVersionUID = 2L;
-    ClawMachine clawMachine;
+    transient ClawMachine clawMachine;
  
     public WinnerState(ClawMachine clawMachine) {
         this.clawMachine = clawMachine;
@@ -20,12 +20,11 @@ public class WinnerState implements State {
  
 	public void dispense() {
 		System.out.println("YOU'RE A WINNER! Your prize is coming!");
-		try {
-			clawMachine.dropClaw();
+		clawMachine.dropPrize();
 			if (clawMachine.getCount() == 0) {
 				clawMachine.setState(clawMachine.getSoldOutState());
 			} else {
-				clawMachine.dropClaw();
+				clawMachine.dropPrize();
 				if (clawMachine.getCount() > 0) {
 					clawMachine.setState(clawMachine.getNoPaymentState());
 				} else {
@@ -33,13 +32,8 @@ public class WinnerState implements State {
 					clawMachine.setState(clawMachine.getSoldOutState());
 					}
 				}
-			} catch (Exception e) {
-				e.printStackTrace();
-		}
-	}
- 
-	public void refill() { }
-	
+			}
+ 	
 	public String toString() {
 		return "WOW! You got THREE prizes!! How'd you do it!?";
 	}

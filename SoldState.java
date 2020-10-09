@@ -1,6 +1,6 @@
 public class SoldState implements State {
 	private static final long serialVersionUID = 2L;
-    ClawMachine clawMachine;
+    transient ClawMachine clawMachine;
  
     public SoldState(ClawMachine clawMachine) {
         this.clawMachine = clawMachine;
@@ -20,21 +20,14 @@ public class SoldState implements State {
  
 	public void dispense() {
 		clawMachine.dropPrize();
-		try {
-
 			if (clawMachine.getCount() > 0) {
 				clawMachine.setState(clawMachine.getNoPaymentState());
 			} else {
 				System.out.println("Sorry, we are out of prizes!");
 				clawMachine.setState(clawMachine.getSoldOutState());
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
-	
-	public void refill() { }
- 
+	 
 	public String toString() {
 		return "dispensing your prize";
 	}

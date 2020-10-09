@@ -3,7 +3,7 @@ import java.util.Random;
 public class PaymentReceived implements State {
 	private static final long serialVersionUID = 2L;
 	Random randomWinner = new Random(System.currentTimeMillis());
-	ClawMachine clawMachine;
+	transient ClawMachine clawMachine;
  
 	public PaymentReceived(ClawMachine clawMachine) {
 		this.clawMachine = clawMachine;
@@ -21,7 +21,7 @@ public class PaymentReceived implements State {
 	public void dropClaw() {
 		System.out.println("Claw dropped... ");
 		int winner = randomWinner.nextInt(10);
-		if ((winner == 0) && (clawMachine.getCount() > 1)) {
+		if (winner == 0) {
 			clawMachine.setState(clawMachine.getWinnerState());
 		} else {
 			clawMachine.setState(clawMachine.getSoldState());
