@@ -1,4 +1,5 @@
 public class SoldOutState implements State {
+	private static final long serialVersionUID = 2L;
     ClawMachine clawMachine;
  
     public SoldOutState(ClawMachine clawMachine) {

@@ -1,6 +1,7 @@
 import java.util.Random;
 
 public class PaymentReceived implements State {
+	private static final long serialVersionUID = 2L;
 	Random randomWinner = new Random(System.currentTimeMillis());
 	ClawMachine clawMachine;
  

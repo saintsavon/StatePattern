@@ -8,18 +8,20 @@ public class ClawMachine {
  
 	State state = soldOutState;
 	int count = 0;
+	String location;
  
-	public ClawMachine(int numberPrizes) {
+	public ClawMachine(String location, int count) {
 		soldOutState = new SoldOutState(this);
 		noPaymentReceived = new NoPaymentReceived(this);
 		paymentReceived = new PaymentReceived(this);
 		soldState = new SoldState(this);
 		winnerState = new WinnerState(this);
 
-		this.count = numberPrizes;
- 		if (numberPrizes > 0) {
+		this.count = count;
+ 		if (count > 0) {
 			state = noPaymentReceived;
-		} 
+		}
+		this.location = location;
 	}
  
 	public void insertPayment() {
@@ -41,24 +43,27 @@ public class ClawMachine {
  
 	void dropPrize() {
 		System.out.println("Your prize is dropping... ");
-		if (count > 0) {
+		if (count != 0) {
 			count = count - 1;
 		}
 	}
  
-	int getCount() {
+	public int getCount() {
 		return count;
 	}
  
-	void refill(int count) {
-		this.count += count;
-		System.out.println("The claw machine was just refilled; its new count is: " + this.count);
-		state.refill();
+	public void refill(int count) {
+		this.count = count;
+		state = noPaymentReceived;
 	}
 
     public State getState() {
         return state;
-    }
+	}
+	
+	public String getLocation() {
+		return location;
+	}
 
     public State getSoldOutState() {
         return soldOutState;

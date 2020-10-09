@@ -1,4 +1,5 @@
 public class NoPaymentReceived implements State {
+	private static final long serialVersionUID = 2L;
     ClawMachine clawMachine;
  
     public NoPaymentReceived(ClawMachine clawMachine) {

@@ -1,5 +1,5 @@
 public class WinnerState implements State {
-
+	private static final long serialVersionUID = 2L;
     ClawMachine clawMachine;
  
     public WinnerState(ClawMachine clawMachine) {
@@ -19,18 +19,22 @@ public class WinnerState implements State {
 	}
  
 	public void dispense() {
-		clawMachine.dropClaw();
-		if (clawMachine.getCount() == 0) {
-			clawMachine.setState(clawMachine.getSoldOutState());
-		} else {
+		System.out.println("YOU'RE A WINNER! Your prize is coming!");
+		try {
 			clawMachine.dropClaw();
-			System.out.println("YOU'RE A WINNER! Your prize is coming!");
-			if (clawMachine.getCount() > 0) {
-				clawMachine.setState(clawMachine.getNoPaymentState());
-			} else {
-            	System.out.println("Sorry! We are all out of prizes!");
+			if (clawMachine.getCount() == 0) {
 				clawMachine.setState(clawMachine.getSoldOutState());
-			}
+			} else {
+				clawMachine.dropClaw();
+				if (clawMachine.getCount() > 0) {
+					clawMachine.setState(clawMachine.getNoPaymentState());
+				} else {
+            		System.out.println("Sorry! We are all out of prizes!");
+					clawMachine.setState(clawMachine.getSoldOutState());
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
 		}
 	}
  
