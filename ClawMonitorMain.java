@@ -3,9 +3,9 @@ import java.rmi.*;
 public class ClawMonitorMain {
 
     public static void main(String[] args) {
-        String[] location = {"rmi://santafe.clawmachine.com/clawmachine",
-                             "rmi://boulder.clawmachine.com/clawmachine",
-                             "rmi://austin.clawmachine.com/clawmachine"};
+        String[] location = {"rmi://indianapolis.theclawmachine.com/clawmachine",
+                             "rmi://losangeles.theclawmachine.com/clawmachine",
+                             "rmi://newyork.theclawmachine.com/clawmachine"};
     
         if (args.length >= 0)
         {
